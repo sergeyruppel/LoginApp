@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U8o-Lr-gu4">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Profile-->
+        <scene sceneID="B4b-QZ-aVS">
+            <objects>
+                <viewController id="M8E-NM-6J7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="noO-bY-XtT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ezB-WT-Wgt"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.19215686269999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle.fill" catalog="system" id="hb3-B2-rgi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="adJ-UU-UMO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-132" y="-10"/>
+        </scene>
+        <!--App-->
+        <scene sceneID="V09-Gh-ek8">
+            <objects>
+                <viewController id="DHf-pS-Xsn" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Sz-EJ-hWL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Py3-fm-SB9"/>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.19215686269999999" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="App" image="apps.iphone" catalog="system" id="1Nt-97-1JS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5kV-EV-BXt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-131" y="-670"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="BPE-tf-DeA">
+            <objects>
+                <tabBarController id="U8o-Lr-gu4" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6gI-jH-Mji">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="DHf-pS-Xsn" kind="relationship" relationship="viewControllers" id="qD8-J9-71b"/>
+                        <segue destination="M8E-NM-6J7" kind="relationship" relationship="viewControllers" id="2S9-Ij-NIc"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkn-nB-boG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1036" y="-367"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="apps.iphone" catalog="system" width="114" height="128"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
+    </resources>
+</document>
