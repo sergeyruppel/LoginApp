@@ -25,6 +25,8 @@ final class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        startKeyBoardObserver()
+        hideKeyboardWhenTappedAround()
     }
     
     private func setupUI() {
@@ -38,7 +40,7 @@ final class CreateAccountViewController: UIViewController {
         emailTextField.layer.masksToBounds = true
         emailTextField.attributedPlaceholder = NSAttributedString(
             string: "Your Email",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         emailTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: emailTextField.frame.height))
         emailTextField.leftViewMode = .always
         
@@ -49,7 +51,7 @@ final class CreateAccountViewController: UIViewController {
         nameTextField.layer.masksToBounds = true
         nameTextField.attributedPlaceholder = NSAttributedString(
             string: "Your Name",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         nameTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: nameTextField.frame.height))
         nameTextField.leftViewMode = .always
         
@@ -59,10 +61,13 @@ final class CreateAccountViewController: UIViewController {
         passwordTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         passwordTextField.layer.masksToBounds = true
         passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "Password",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+            string: "Enter Password",
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         passwordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: passwordTextField.frame.height))
         passwordTextField.leftViewMode = .always
+        
+        //strongPasswordMeter
+        strongPasswordMeter.forEach { $0.alpha = 0.1 }
         
         // confirmPasswordTextField
         confirmPasswordTextField.layer.cornerRadius = confirmPasswordTextField.frame.height * 0.5
@@ -71,11 +76,34 @@ final class CreateAccountViewController: UIViewController {
         confirmPasswordTextField.layer.masksToBounds = true
         confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
             string: "Confirm Password",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.white])
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         confirmPasswordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: confirmPasswordTextField.frame.height))
         confirmPasswordTextField.leftViewMode = .always
         
-
+    }
+    
+    private func startKeyBoardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: Notification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let contentInsets = UIEdgeInsets(top: 0.0,
+                                         left: 0.0,
+                                         bottom: keyboardSize.height,
+                                         right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc private func keyboardWillHide() {
+        let contentInsets = UIEdgeInsets(top: 0.0,
+                                         left: 0.0,
+                                         bottom: 0.0,
+                                         right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
 
     /*
