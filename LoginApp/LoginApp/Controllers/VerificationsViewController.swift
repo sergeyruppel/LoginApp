@@ -53,13 +53,13 @@ final class VerificationsViewController: UIViewController {
         infoLabel.text = "Please enter code \"\(randomInt)\" from \(userModel?.email ?? "")"
         
         UITextField.appearance().tintColor = .white
-//        codeTextField.layer.cornerRadius = codeTextField.frame.height * 0.5
-//        codeTextField.layer.borderWidth = 2.0
-//        codeTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        codeTextField.layer.masksToBounds = true
-//        codeTextField.attributedPlaceholder = NSAttributedString(
-//            string: "Secret Code",
-//            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        codeTextField.layer.cornerRadius = codeTextField.frame.height * 0.5
+        codeTextField.layer.borderWidth = 2.0
+        codeTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        codeTextField.layer.masksToBounds = true
+        codeTextField.attributedPlaceholder = NSAttributedString(
+            string: "Secret Code",
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
     }
     
 //    @objc private func resetErrorTextField() {
