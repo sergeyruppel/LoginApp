@@ -10,17 +10,24 @@ import UIKit
 final class CreateAccountViewController: UIViewController {
     
     // MARK: - IBOutlets
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet var strongPasswordMeter: [UIView]!
-    
+    @IBOutlet var passwordStrengthMeter: [UIView]!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    
-    @IBOutlet weak var continueButton: UIButton!
-    
+    @IBOutlet weak var continueButton: UIButton! {
+        didSet { continueButton.isEnabled = false }
+    }
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    // MARK: - Properties
+    
+    private var isValidEmail = false { didSet { updateContinueButtonState() } }
+    private var isConfirmPassword = false { didSet { updateContinueButtonState() } }
+    private var passwordStrength: PasswordStrength = .veryWeak {
+        didSet { updateContinueButtonState() }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +36,65 @@ final class CreateAccountViewController: UIViewController {
         hideKeyboardWhenTappedAround()
     }
     
+    // MARK: - Verification
+    
+    @IBAction func emailTextFieldAction(_ sender: UITextField) {
+        if let email = sender.text,
+           !email.isEmpty,
+           VerificationService.isValidEmail(email: email) {
+            isValidEmail = true
+            sender.backgroundColor = .clear
+        } else {
+            isValidEmail = false
+            sender.backgroundColor = UIColor(
+                red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
+            )
+        }
+    }
+    
+    @IBAction func passwordTextFieldAction(_ sender: UITextField) {
+        if let passwordText = sender.text,
+           !passwordText.isEmpty {
+            passwordStrength = VerificationService.isValidPassword(password: passwordText)
+        } else {
+            passwordStrength = .veryWeak
+        }
+        sender.backgroundColor = passwordStrength != .veryWeak ? .clear : UIColor(
+            red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
+        )
+        setupPasswordStrengthMeter()
+    }
+    
+    @IBAction func confirmPasswordTextFieldAction(_ sender: UITextField) {
+        if let confirmPasswordText = sender.text,
+           !confirmPasswordText.isEmpty,
+           let passwordText = passwordTextField.text,
+           !passwordText.isEmpty {
+            isConfirmPassword = VerificationService.isPasswordsConfirm(
+                password1: passwordText, password2: confirmPasswordText
+            )
+        } else {
+            isConfirmPassword = false
+        }
+        sender.backgroundColor = isConfirmPassword ? .clear : UIColor(
+            red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
+        )
+    }
+
+    @IBAction func continueAction() {
+        if let email = emailTextField.text,
+           let password = passwordTextField.text {
+            let userModel = UserModel(
+                email: email, name: nameTextField.text, password: password
+            )
+            performSegue(withIdentifier: "goToVerificationScreen", sender: userModel)
+        }
+    }
+    
+    
+    // MARK: - Setup UI
+    
     private func setupUI() {
-    // MARK: UITextField
         UITextField.appearance().tintColor = .white
         
         // emailTextField
@@ -41,7 +105,9 @@ final class CreateAccountViewController: UIViewController {
         emailTextField.attributedPlaceholder = NSAttributedString(
             string: "Your Email",
             attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        emailTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: emailTextField.frame.height))
+        emailTextField.leftView = UIView(
+            frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: emailTextField.frame.height)
+        )
         emailTextField.leftViewMode = .always
         
         // nameTextField
@@ -52,7 +118,9 @@ final class CreateAccountViewController: UIViewController {
         nameTextField.attributedPlaceholder = NSAttributedString(
             string: "Your Name",
             attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        nameTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: nameTextField.frame.height))
+        nameTextField.leftView = UIView(
+            frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: nameTextField.frame.height)
+        )
         nameTextField.leftViewMode = .always
         
         // passwordTextField
@@ -62,12 +130,15 @@ final class CreateAccountViewController: UIViewController {
         passwordTextField.layer.masksToBounds = true
         passwordTextField.attributedPlaceholder = NSAttributedString(
             string: "Enter Password",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        passwordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: passwordTextField.frame.height))
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        passwordTextField.leftView = UIView(
+            frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: passwordTextField.frame.height)
+        )
         passwordTextField.leftViewMode = .always
         
         //strongPasswordMeter
-        strongPasswordMeter.forEach { $0.alpha = 0.1 }
+        passwordStrengthMeter.forEach({ $0.alpha = 0.2 })
         
         // confirmPasswordTextField
         confirmPasswordTextField.layer.cornerRadius = confirmPasswordTextField.frame.height * 0.5
@@ -76,7 +147,8 @@ final class CreateAccountViewController: UIViewController {
         confirmPasswordTextField.layer.masksToBounds = true
         confirmPasswordTextField.attributedPlaceholder = NSAttributedString(
             string: "Confirm Password",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
         confirmPasswordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: confirmPasswordTextField.frame.height))
         confirmPasswordTextField.leftViewMode = .always
         
@@ -105,15 +177,28 @@ final class CreateAccountViewController: UIViewController {
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func setupPasswordStrengthMeter() {
+        passwordStrengthMeter.enumerated().forEach({ index, view in
+            if index < passwordStrength.rawValue {
+                view.alpha = 1.0
+            } else {
+                view.alpha = 0.2
+            }
+        })
     }
-    */
-
+    
+    private func updateContinueButtonState() {
+        continueButton.isEnabled = isValidEmail && isConfirmPassword && passwordStrength != .veryWeak
+    }
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? VerificationsViewController,
+              let userModel = sender as? UserModel else { return }
+        destinationVC.userModel = userModel
+    }
+    
 }
