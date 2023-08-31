@@ -19,6 +19,8 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var doneButton: UIButton! {
         didSet { doneButton.isEnabled = false }
     }
+    @IBOutlet weak var passwordVisibilityButton: UIButton!
+    @IBOutlet weak var confirmPasswordVisibilityButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Properties
@@ -28,6 +30,7 @@ class EditProfileViewController: UIViewController {
     private var passwordStrength: PasswordStrength = .veryWeak {
         didSet { updateDoneButtonState() }
     }
+    private var isPasswordVisible = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +82,25 @@ class EditProfileViewController: UIViewController {
         sender.backgroundColor = isConfirmPassword ? .clear : UIColor(
             red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
         )
+    }
+    
+    @IBAction func togglePasswordVisibility(sender: AnyObject) {
+        if isPasswordVisible {
+            newPasswordTextField.isSecureTextEntry = false
+            confirmPasswordTextField.isSecureTextEntry = false
+            passwordVisibilityButton.setImage(UIImage(systemName: "eye"),
+                                              for: .normal)
+            confirmPasswordVisibilityButton.setImage(UIImage(systemName: "eye"),
+                                                     for: .normal)
+        } else {
+            newPasswordTextField.isSecureTextEntry = true
+            confirmPasswordTextField.isSecureTextEntry = true
+            passwordVisibilityButton.setImage(UIImage(systemName: "eye.slash"),
+                                              for: .normal)
+            confirmPasswordVisibilityButton.setImage(UIImage(systemName: "eye.slash"),
+                                                     for: .normal)
+        }
+        isPasswordVisible = !isPasswordVisible
     }
     
     @IBAction func doneAction() {
@@ -147,6 +169,9 @@ class EditProfileViewController: UIViewController {
         )
         newPasswordTextField.leftViewMode = .always
         
+        newPasswordTextField.rightView = passwordVisibilityButton
+        newPasswordTextField.rightViewMode = .always
+        
         //strongPasswordMeter
         passwordStrengthMeter.forEach({ $0.alpha = 0.2 })
         
@@ -161,6 +186,9 @@ class EditProfileViewController: UIViewController {
         )
         confirmPasswordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: confirmPasswordTextField.frame.height))
         confirmPasswordTextField.leftViewMode = .always
+        
+        confirmPasswordTextField.rightView = confirmPasswordVisibilityButton
+        confirmPasswordTextField.rightViewMode = .always
         
     }
     

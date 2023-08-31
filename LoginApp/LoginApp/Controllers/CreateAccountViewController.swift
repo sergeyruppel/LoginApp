@@ -14,11 +14,15 @@ final class CreateAccountViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    
     @IBOutlet var passwordStrengthMeter: [UIView]!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var continueButton: UIButton! {
         didSet { continueButton.isEnabled = false }
     }
+    @IBOutlet weak var passwordVisibilityButton: UIButton!
+    @IBOutlet weak var confirmPasswordVisibilityButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Properties
@@ -28,6 +32,9 @@ final class CreateAccountViewController: UIViewController {
     private var passwordStrength: PasswordStrength = .veryWeak {
         didSet { updateContinueButtonState() }
     }
+    private var isPasswordVisible = true
+
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +86,25 @@ final class CreateAccountViewController: UIViewController {
         sender.backgroundColor = isConfirmPassword ? .clear : UIColor(
             red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
         )
+    }
+    
+    @IBAction func togglePasswordVisibility(sender: AnyObject) {
+        if isPasswordVisible {
+            passwordTextField.isSecureTextEntry = false
+            confirmPasswordTextField.isSecureTextEntry = false
+            passwordVisibilityButton.setImage(UIImage(systemName: "eye"),
+                                              for: .normal)
+            confirmPasswordVisibilityButton.setImage(UIImage(systemName: "eye"),
+                                                     for: .normal)
+        } else {
+            passwordTextField.isSecureTextEntry = true
+            confirmPasswordTextField.isSecureTextEntry = true
+            passwordVisibilityButton.setImage(UIImage(systemName: "eye.slash"),
+                                              for: .normal)
+            confirmPasswordVisibilityButton.setImage(UIImage(systemName: "eye.slash"),
+                                                     for: .normal)
+        }
+        isPasswordVisible = !isPasswordVisible
     }
 
     @IBAction func continueAction() {
@@ -137,6 +163,10 @@ final class CreateAccountViewController: UIViewController {
         )
         passwordTextField.leftViewMode = .always
         
+
+        passwordTextField.rightView = passwordVisibilityButton
+        passwordTextField.rightViewMode = .always
+        
         //strongPasswordMeter
         passwordStrengthMeter.forEach({ $0.alpha = 0.2 })
         
@@ -151,6 +181,9 @@ final class CreateAccountViewController: UIViewController {
         )
         confirmPasswordTextField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: confirmPasswordTextField.frame.height))
         confirmPasswordTextField.leftViewMode = .always
+        
+        confirmPasswordTextField.rightView = confirmPasswordVisibilityButton
+        confirmPasswordTextField.rightViewMode = .always
         
     }
     
