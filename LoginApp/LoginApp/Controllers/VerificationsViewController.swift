@@ -23,7 +23,7 @@ final class VerificationsViewController: UIViewController {
         startKeyBoardObserver()
         hideKeyboardWhenTappedAround()
     }
-    
+        
     @IBAction func codeTextFieldAction(_ sender: UITextField) {
         guard let codeText = sender.text,
               !codeText.isEmpty,

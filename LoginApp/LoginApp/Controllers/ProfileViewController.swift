@@ -21,7 +21,23 @@ class ProfileViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func deletAccountAction() {
+        UserDefaultsService.resetUserDefaults()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @IBAction func logOutAction() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func setupUI() {
@@ -32,7 +48,6 @@ class ProfileViewController: UIViewController {
         }
     }
     
-
     /*
     // MARK: - Navigation
 

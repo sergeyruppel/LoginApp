@@ -89,6 +89,9 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="baseBackgroundColor" red="0.95686274510000002" green="0.33725490200000002" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="logOutAction" destination="M8E-NM-6J7" eventType="touchUpInside" id="WOD-xb-poW"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

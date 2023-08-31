@@ -89,7 +89,7 @@ class EditProfileViewController: UIViewController {
             )
             UserDefaultsService.saveUserModel(userModel: userModel)
             dismiss(animated: true)
-            print(UserDefaultsService.getUserModel()?.password)
+            // TODO: refresh parent VC
         }
     }
     

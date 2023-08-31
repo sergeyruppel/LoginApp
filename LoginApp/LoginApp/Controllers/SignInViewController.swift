@@ -11,9 +11,7 @@ final class SignInViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signInButton: UIButton! //{
-      //  didSet { signInButton.isEnabled = false }
-   // }
+    @IBOutlet weak var signInButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +42,11 @@ final class SignInViewController: UIViewController {
                 red: 1.0, green: 0.0, blue: 0.0, alpha: 0.2
             )
             passwordTextField.text = ""
-            passwordTextField.placeholder = "W"
+            passwordTextField.placeholder = "Wrong Password"
             return
         }
         goToTabBarController()
-
+        
     }
     
     
@@ -80,7 +78,7 @@ final class SignInViewController: UIViewController {
         guard let vc = storyboard.instantiateViewController(
             withIdentifier: "TabBarController"
         ) as? TabBarController else { return }
-        navigationController?.pushViewController(vc , animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

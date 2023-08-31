@@ -22,11 +22,21 @@ class WelcomeViewController: UIViewController {
     @IBAction func continueAction() {
         guard let userModel = userModel else { return }
         UserDefaultsService.saveUserModel(userModel: userModel)
-        navigationController?.popToRootViewController(animated: true)
+//        navigationController?.popToRootViewController(animated: true)
+        goToTabBarController()
     }
     
     private func setupUI() {
         infoLabel.text = "\(userModel?.name ?? "") to Login App"
+    }
+    
+    
+    private func goToTabBarController() {
+        let storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(
+            withIdentifier: "TabBarController"
+        ) as? TabBarController else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
