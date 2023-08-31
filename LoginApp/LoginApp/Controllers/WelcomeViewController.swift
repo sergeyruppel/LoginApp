@@ -20,9 +20,8 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func continueAction() {
-        saveToUserDefaults()
-        syncUserDefaults()
-        printUserDefaults()
+        guard let userModel = userModel else { return }
+        UserDefaultsService.saveUserModel(userModel: userModel)
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -30,23 +29,4 @@ class WelcomeViewController: UIViewController {
         infoLabel.text = "\(userModel?.name ?? "") to Login App"
     }
     
-    func saveToUserDefaults() {
-        UserDefaults.standard.set(userModel?.name, forKey: "nameKey")
-        UserDefaults.standard.set(userModel?.email, forKey: "emailKey")
-        UserDefaults.standard.set(userModel?.password, forKey: "passKey")
-    }
-    func syncUserDefaults() {
-        UserDefaults.standard.synchronize()
-    }
-    func printUserDefaults() {
-        if let savedName = UserDefaults.standard.string(forKey: "nameKey"),
-           let savedEmail = UserDefaults.standard.string(forKey: "emailKey"),
-           let savedPassword = UserDefaults.standard.string(forKey: "passKey") {
-            print("User Name: \(savedName)")
-            print("User Email: \(savedEmail)")
-            print("User Password: \(savedPassword)")
-        } else {
-            print("Data not found in UserDefaults.")
-        }
-    }
 }
