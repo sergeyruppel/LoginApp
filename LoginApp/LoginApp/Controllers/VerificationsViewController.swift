@@ -50,6 +50,7 @@ final class VerificationsViewController: UIViewController {
     }
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         infoLabel.text = "Please enter code \"\(randomInt)\" from \(userModel?.email ?? "")"
         
         UITextField.appearance().tintColor = .white

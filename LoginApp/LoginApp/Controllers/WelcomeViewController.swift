@@ -27,6 +27,7 @@ class WelcomeViewController: UIViewController {
     }
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         infoLabel.text = "\(userModel?.name ?? "") to Login App"
     }
     

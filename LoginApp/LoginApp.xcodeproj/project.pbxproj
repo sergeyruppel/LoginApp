@@ -26,6 +26,7 @@
 		3AA740002A95246B00B8EF94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA73FFF2A95246B00B8EF94 /* Assets.xcassets */; };
 		3AA740032A95246B00B8EF94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA740012A95246B00B8EF94 /* LaunchScreen.storyboard */; };
 		3AADFB832A986FC900396D95 /* VerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADFB822A986FC900396D95 /* VerificationService.swift */; };
+		3ABDDD522AA0F3340042EEEA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDDD512AA0F3340042EEEA /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		3AA740022A95246B00B8EF94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AA740042A95246B00B8EF94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AADFB822A986FC900396D95 /* VerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationService.swift; sourceTree = "<group>"; };
+		3ABDDD512AA0F3340042EEEA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				3A9E54C82AA03D2000F538CF /* TabBarController.swift */,
 				3A9E54CA2AA04CDB00F538CF /* ProfileViewController.swift */,
 				3A9E54CC2AA053C100F538CF /* EditProfileViewController.swift */,
+				3ABDDD512AA0F3340042EEEA /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				3A9E54CD2AA053C100F538CF /* EditProfileViewController.swift in Sources */,
 				3A90050C2A9766D400D290D9 /* UIViewControllerExtension.swift in Sources */,
 				3AA73FF92A95246A00B8EF94 /* SceneDelegate.swift in Sources */,
+				3ABDDD522AA0F3340042EEEA /* MainViewController.swift in Sources */,
 				3A331EE12A96476200FBF187 /* SignInViewController.swift in Sources */,
 				3A9E54C92AA03D2000F538CF /* TabBarController.swift in Sources */,
 				3A9E54CB2AA04CDB00F538CF /* ProfileViewController.swift in Sources */,

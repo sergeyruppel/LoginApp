@@ -121,6 +121,7 @@ final class CreateAccountViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         UITextField.appearance().tintColor = .white
         
         // emailTextField

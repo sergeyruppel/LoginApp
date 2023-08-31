@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+final class EditProfileViewController: UIViewController {
     
     // MARK: - IBOutlets
     
@@ -110,7 +110,9 @@ class EditProfileViewController: UIViewController {
                 email: email, name: nameTextField.text, password: password
             )
             UserDefaultsService.saveUserModel(userModel: userModel)
-            dismiss(animated: true)
+            
+            dismiss(animated: true, completion: nil)
+
             // TODO: refresh parent VC
         }
     }
@@ -119,6 +121,7 @@ class EditProfileViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         UITextField.appearance().tintColor = .white
         
         // emailTextField
@@ -230,13 +233,4 @@ class EditProfileViewController: UIViewController {
         doneButton.isEnabled = isConfirmPassword && passwordStrength != .veryWeak
     }
     
-    
-    // MARK: - Navigation
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let destinationVC = segue.destination as? VerificationsViewController,
-//              let userModel = sender as? UserModel else { return }
-//        destinationVC.userModel = userModel
-//    }
-
 }
