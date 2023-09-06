@@ -20,33 +20,24 @@ class WelcomeViewController: UIViewController {
     }
     
     @IBAction func continueAction() {
-        saveToUserDefaults()
-        syncUserDefaults()
-        printUserDefaults()
-        navigationController?.popToRootViewController(animated: true)
+        guard let userModel = userModel else { return }
+        UserDefaultsService.saveUserModel(userModel: userModel)
+//        navigationController?.popToRootViewController(animated: true)
+        goToTabBarController()
     }
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         infoLabel.text = "\(userModel?.name ?? "") to Login App"
     }
     
-    func saveToUserDefaults() {
-        UserDefaults.standard.set(userModel?.name, forKey: "nameKey")
-        UserDefaults.standard.set(userModel?.email, forKey: "emailKey")
-        UserDefaults.standard.set(userModel?.password, forKey: "passKey")
+    
+    private func goToTabBarController() {
+        let storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(
+            withIdentifier: "TabBarController"
+        ) as? TabBarController else { return }
+        navigationController?.pushViewController(vc, animated: true)
     }
-    func syncUserDefaults() {
-        UserDefaults.standard.synchronize()
-    }
-    func printUserDefaults() {
-        if let savedName = UserDefaults.standard.string(forKey: "nameKey"),
-           let savedEmail = UserDefaults.standard.string(forKey: "emailKey"),
-           let savedPassword = UserDefaults.standard.string(forKey: "passKey") {
-            print("User Name: \(savedName)")
-            print("User Email: \(savedEmail)")
-            print("User Password: \(savedPassword)")
-        } else {
-            print("Data not found in UserDefaults.")
-        }
-    }
+    
 }

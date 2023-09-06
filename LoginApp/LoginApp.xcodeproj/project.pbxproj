@@ -10,10 +10,15 @@
 		3A331EDA2A96368400FBF187 /* SignInStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A331ED92A96368400FBF187 /* SignInStoryboard.storyboard */; };
 		3A331EDC2A963AC900FBF187 /* SignUpStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A331EDB2A963AC900FBF187 /* SignUpStoryboard.storyboard */; };
 		3A331EE12A96476200FBF187 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A331EE02A96476200FBF187 /* SignInViewController.swift */; };
+		3A58925A2A9F888F00454D24 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5892592A9F888F00454D24 /* UserDefaultsService.swift */; };
+		3A58925C2A9F8A2800454D24 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A58925B2A9F8A2800454D24 /* UserDefaultsExtension.swift */; };
 		3A78053A2A97391100822B59 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7805392A97391100822B59 /* CreateAccountViewController.swift */; };
 		3A876F232A98BD8700D6E726 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A876F222A98BD8700D6E726 /* UserModel.swift */; };
 		3A876F252A98CA6B00D6E726 /* VerificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A876F242A98CA6B00D6E726 /* VerificationsViewController.swift */; };
 		3A90050C2A9766D400D290D9 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A90050B2A9766D400D290D9 /* UIViewControllerExtension.swift */; };
+		3A9E54C92AA03D2000F538CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E54C82AA03D2000F538CF /* TabBarController.swift */; };
+		3A9E54CB2AA04CDB00F538CF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E54CA2AA04CDB00F538CF /* ProfileViewController.swift */; };
+		3A9E54CD2AA053C100F538CF /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E54CC2AA053C100F538CF /* EditProfileViewController.swift */; };
 		3AA22F842A98F945003F9620 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA22F832A98F945003F9620 /* WelcomeViewController.swift */; };
 		3AA73FF72A95246A00B8EF94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA73FF62A95246A00B8EF94 /* AppDelegate.swift */; };
 		3AA73FF92A95246A00B8EF94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA73FF82A95246A00B8EF94 /* SceneDelegate.swift */; };
@@ -21,16 +26,22 @@
 		3AA740002A95246B00B8EF94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA73FFF2A95246B00B8EF94 /* Assets.xcassets */; };
 		3AA740032A95246B00B8EF94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA740012A95246B00B8EF94 /* LaunchScreen.storyboard */; };
 		3AADFB832A986FC900396D95 /* VerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AADFB822A986FC900396D95 /* VerificationService.swift */; };
+		3ABDDD522AA0F3340042EEEA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABDDD512AA0F3340042EEEA /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3A331ED92A96368400FBF187 /* SignInStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInStoryboard.storyboard; sourceTree = "<group>"; };
 		3A331EDB2A963AC900FBF187 /* SignUpStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUpStoryboard.storyboard; sourceTree = "<group>"; };
 		3A331EE02A96476200FBF187 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		3A5892592A9F888F00454D24 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		3A58925B2A9F8A2800454D24 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		3A7805392A97391100822B59 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		3A876F222A98BD8700D6E726 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3A876F242A98CA6B00D6E726 /* VerificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationsViewController.swift; sourceTree = "<group>"; };
 		3A90050B2A9766D400D290D9 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		3A9E54C82AA03D2000F538CF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3A9E54CA2AA04CDB00F538CF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3A9E54CC2AA053C100F538CF /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		3AA22F832A98F945003F9620 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3AA73FF32A95246A00B8EF94 /* LoginApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA73FF62A95246A00B8EF94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +51,7 @@
 		3AA740022A95246B00B8EF94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3AA740042A95246B00B8EF94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AADFB822A986FC900396D95 /* VerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationService.swift; sourceTree = "<group>"; };
+		3ABDDD512AA0F3340042EEEA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +92,10 @@
 				3A7805392A97391100822B59 /* CreateAccountViewController.swift */,
 				3A876F242A98CA6B00D6E726 /* VerificationsViewController.swift */,
 				3AA22F832A98F945003F9620 /* WelcomeViewController.swift */,
+				3A9E54C82AA03D2000F538CF /* TabBarController.swift */,
+				3A9E54CA2AA04CDB00F538CF /* ProfileViewController.swift */,
+				3A9E54CC2AA053C100F538CF /* EditProfileViewController.swift */,
+				3ABDDD512AA0F3340042EEEA /* MainViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -96,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				3A90050B2A9766D400D290D9 /* UIViewControllerExtension.swift */,
+				3A58925B2A9F8A2800454D24 /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -135,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				3AADFB822A986FC900396D95 /* VerificationService.swift */,
+				3A5892592A9F888F00454D24 /* UserDefaultsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -214,13 +232,19 @@
 			files = (
 				3AA22F842A98F945003F9620 /* WelcomeViewController.swift in Sources */,
 				3A78053A2A97391100822B59 /* CreateAccountViewController.swift in Sources */,
+				3A58925A2A9F888F00454D24 /* UserDefaultsService.swift in Sources */,
 				3A876F232A98BD8700D6E726 /* UserModel.swift in Sources */,
 				3AA73FF72A95246A00B8EF94 /* AppDelegate.swift in Sources */,
 				3A876F252A98CA6B00D6E726 /* VerificationsViewController.swift in Sources */,
+				3A9E54CD2AA053C100F538CF /* EditProfileViewController.swift in Sources */,
 				3A90050C2A9766D400D290D9 /* UIViewControllerExtension.swift in Sources */,
 				3AA73FF92A95246A00B8EF94 /* SceneDelegate.swift in Sources */,
+				3ABDDD522AA0F3340042EEEA /* MainViewController.swift in Sources */,
 				3A331EE12A96476200FBF187 /* SignInViewController.swift in Sources */,
+				3A9E54C92AA03D2000F538CF /* TabBarController.swift in Sources */,
+				3A9E54CB2AA04CDB00F538CF /* ProfileViewController.swift in Sources */,
 				3AADFB832A986FC900396D95 /* VerificationService.swift in Sources */,
+				3A58925C2A9F8A2800454D24 /* UserDefaultsExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +394,7 @@
 				DEVELOPMENT_TEAM = XMRMHLG4UV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoginApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Login App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = SignInStoryboard;
@@ -401,6 +426,7 @@
 				DEVELOPMENT_TEAM = XMRMHLG4UV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LoginApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Login App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = SignInStoryboard;

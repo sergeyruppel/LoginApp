@@ -48,6 +48,9 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="baseBackgroundColor" red="0.95686274509803915" green="0.33725490196078434" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="signInAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="X6b-Q8-akT"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -112,7 +115,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWF-Fq-dnK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1695" y="30"/>
+            <point key="canvasLocation" x="1731" y="-96"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nyS-16-OuM">

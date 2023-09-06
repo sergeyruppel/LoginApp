@@ -1,25 +1,23 @@
 //
-//  CreateAccountViewController.swift
+//  EditProfileViewController.swift
 //  LoginApp
 //
-//  Created by Sergey Ruppel on 24.08.2023.
+//  Created by Sergey Ruppel on 31.08.2023.
 //
 
 import UIKit
 
-final class CreateAccountViewController: UIViewController {
+final class EditProfileViewController: UIViewController {
     
     // MARK: - IBOutlets
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    
-    
+    @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet var passwordStrengthMeter: [UIView]!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var continueButton: UIButton! {
-        didSet { continueButton.isEnabled = false }
+    @IBOutlet weak var doneButton: UIButton! {
+        didSet { doneButton.isEnabled = false }
     }
     @IBOutlet weak var passwordVisibilityButton: UIButton!
     @IBOutlet weak var confirmPasswordVisibilityButton: UIButton!
@@ -27,14 +25,12 @@ final class CreateAccountViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var isValidEmail = false { didSet { updateContinueButtonState() } }
-    private var isConfirmPassword = false { didSet { updateContinueButtonState() } }
+    private var isValidEmail = false
+    private var isConfirmPassword = false { didSet { updateDoneButtonState() } }
     private var passwordStrength: PasswordStrength = .veryWeak {
-        didSet { updateContinueButtonState() }
+        didSet { updateDoneButtonState() }
     }
     private var isPasswordVisible = true
-
-    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +38,7 @@ final class CreateAccountViewController: UIViewController {
         startKeyBoardObserver()
         hideKeyboardWhenTappedAround()
     }
-    
+
     // MARK: - Verification
     
     @IBAction func emailTextFieldAction(_ sender: UITextField) {
@@ -59,7 +55,7 @@ final class CreateAccountViewController: UIViewController {
         }
     }
     
-    @IBAction func passwordTextFieldAction(_ sender: UITextField) {
+    @IBAction func newPasswordTextFieldAction(_ sender: UITextField) {
         if let passwordText = sender.text,
            !passwordText.isEmpty {
             passwordStrength = VerificationService.isValidPassword(password: passwordText)
@@ -75,7 +71,7 @@ final class CreateAccountViewController: UIViewController {
     @IBAction func confirmPasswordTextFieldAction(_ sender: UITextField) {
         if let confirmPasswordText = sender.text,
            !confirmPasswordText.isEmpty,
-           let passwordText = passwordTextField.text,
+           let passwordText = newPasswordTextField.text,
            !passwordText.isEmpty {
             isConfirmPassword = VerificationService.isPasswordsConfirm(
                 password1: passwordText, password2: confirmPasswordText
@@ -90,14 +86,14 @@ final class CreateAccountViewController: UIViewController {
     
     @IBAction func togglePasswordVisibility(sender: AnyObject) {
         if isPasswordVisible {
-            passwordTextField.isSecureTextEntry = false
+            newPasswordTextField.isSecureTextEntry = false
             confirmPasswordTextField.isSecureTextEntry = false
             passwordVisibilityButton.setImage(UIImage(systemName: "eye"),
                                               for: .normal)
             confirmPasswordVisibilityButton.setImage(UIImage(systemName: "eye"),
                                                      for: .normal)
         } else {
-            passwordTextField.isSecureTextEntry = true
+            newPasswordTextField.isSecureTextEntry = true
             confirmPasswordTextField.isSecureTextEntry = true
             passwordVisibilityButton.setImage(UIImage(systemName: "eye.slash"),
                                               for: .normal)
@@ -106,14 +102,18 @@ final class CreateAccountViewController: UIViewController {
         }
         isPasswordVisible = !isPasswordVisible
     }
-
-    @IBAction func continueAction() {
+    
+    @IBAction func doneAction() {
         if let email = emailTextField.text,
-           let password = passwordTextField.text {
+           let password = newPasswordTextField.text {
             let userModel = UserModel(
                 email: email, name: nameTextField.text, password: password
             )
-            performSegue(withIdentifier: "goToVerificationScreen", sender: userModel)
+            UserDefaultsService.saveUserModel(userModel: userModel)
+            
+            dismiss(animated: true, completion: nil)
+
+            // TODO: refresh parent VC
         }
     }
     
@@ -129,9 +129,13 @@ final class CreateAccountViewController: UIViewController {
         emailTextField.layer.borderWidth = 2.0
         emailTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         emailTextField.layer.masksToBounds = true
-        emailTextField.attributedPlaceholder = NSAttributedString(
-            string: "Your Email",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        guard let email = UserDefaultsService.getUserModel()?.email else {
+            emailTextField.attributedPlaceholder = NSAttributedString(
+                string: "Your Email",
+                attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return
+        }
+        emailTextField.text = email
         emailTextField.leftView = UIView(
             frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: emailTextField.frame.height)
         )
@@ -142,31 +146,34 @@ final class CreateAccountViewController: UIViewController {
         nameTextField.layer.borderWidth = 2.0
         nameTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         nameTextField.layer.masksToBounds = true
-        nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Your Name",
-            attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        guard let name = UserDefaultsService.getUserModel()?.name else {
+            nameTextField.attributedPlaceholder = NSAttributedString(
+                string: "Your Name",
+                attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+            return
+        }
+        nameTextField.text = name
         nameTextField.leftView = UIView(
             frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: nameTextField.frame.height)
         )
         nameTextField.leftViewMode = .always
         
-        // passwordTextField
-        passwordTextField.layer.cornerRadius = passwordTextField.frame.height * 0.5
-        passwordTextField.layer.borderWidth = 2.0
-        passwordTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        passwordTextField.layer.masksToBounds = true
-        passwordTextField.attributedPlaceholder = NSAttributedString(
-            string: "Enter Password",
+        // newPasswordTextField
+        newPasswordTextField.layer.cornerRadius = newPasswordTextField.frame.height * 0.5
+        newPasswordTextField.layer.borderWidth = 2.0
+        newPasswordTextField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        newPasswordTextField.layer.masksToBounds = true
+        newPasswordTextField.attributedPlaceholder = NSAttributedString(
+            string: "New Password",
             attributes:[NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
-        passwordTextField.leftView = UIView(
-            frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: passwordTextField.frame.height)
+        newPasswordTextField.leftView = UIView(
+            frame: CGRect(x: 0.0, y: 0.0, width: 30.0, height: newPasswordTextField.frame.height)
         )
-        passwordTextField.leftViewMode = .always
+        newPasswordTextField.leftViewMode = .always
         
-
-        passwordTextField.rightView = passwordVisibilityButton
-        passwordTextField.rightViewMode = .always
+        newPasswordTextField.rightView = passwordVisibilityButton
+        newPasswordTextField.rightViewMode = .always
         
         //strongPasswordMeter
         passwordStrengthMeter.forEach({ $0.alpha = 0.2 })
@@ -222,17 +229,8 @@ final class CreateAccountViewController: UIViewController {
         })
     }
     
-    private func updateContinueButtonState() {
-        continueButton.isEnabled = isValidEmail && isConfirmPassword && passwordStrength != .veryWeak
-    }
-    
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationVC = segue.destination as? VerificationsViewController,
-              let userModel = sender as? UserModel else { return }
-        destinationVC.userModel = userModel
+    private func updateDoneButtonState() {
+        doneButton.isEnabled = isConfirmPassword && passwordStrength != .veryWeak
     }
     
 }

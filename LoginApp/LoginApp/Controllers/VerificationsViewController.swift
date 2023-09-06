@@ -23,7 +23,7 @@ final class VerificationsViewController: UIViewController {
         startKeyBoardObserver()
         hideKeyboardWhenTappedAround()
     }
-    
+        
     @IBAction func codeTextFieldAction(_ sender: UITextField) {
         guard let codeText = sender.text,
               !codeText.isEmpty,
@@ -50,6 +50,7 @@ final class VerificationsViewController: UIViewController {
     }
     
     private func setupUI() {
+        overrideUserInterfaceStyle = .dark
         infoLabel.text = "Please enter code \"\(randomInt)\" from \(userModel?.email ?? "")"
         
         UITextField.appearance().tintColor = .white
